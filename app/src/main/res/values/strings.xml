@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Foody</string>
+    <string name="main_activity_label">Welcome to Foody!</string>
 </resources>
