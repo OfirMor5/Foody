@@ -32,9 +32,9 @@ public class FeedListFrag extends Fragment {
 
     Delegate parent;
 
-//    public FeedListFragment() {
-//        data = PostModel.instance.getAllPosts();
-//    }
+    public FeedListFrag() {
+        data = PostModel.instance.getAllPosts();
+    }
 
     @Override
     public void onAttach(@NonNull Context context) {
