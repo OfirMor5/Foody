@@ -2,23 +2,19 @@ package com.example.foody.activities;
 
 import com.example.foody.R;
 import com.example.foody.Utils;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,14 +26,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
 import java.util.HashMap;
 import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+
 public class RegisterPageActivity extends AppCompatActivity {
 
-    //XML views
     ImageView backgroundImageView;
     EditText usernameInput;
     EditText passwordInput;
@@ -45,17 +43,17 @@ public class RegisterPageActivity extends AppCompatActivity {
     Button registerBtn;
     CircleImageView profileImageView;
 
-    //Firebase
     FirebaseFirestore firebaseFirestore;
     FirebaseAuth firebaseAuth;
     StorageReference storageReference;
 
-    //for opening gallery
+    //Open gallery
     Uri profileImageUrl;
     static int REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_page);
 
@@ -63,9 +61,8 @@ public class RegisterPageActivity extends AppCompatActivity {
         passwordInput = findViewById(R.id.register_activity_password_edit_text);
         emailInput = findViewById(R.id.register_activity_email_edit_text);
         profileImageView = findViewById(R.id.register_activity_profile_image_view);
-
-
         backgroundImageView = findViewById(R.id.register_activity_background_image_view);
+
         Utils.animateBackground(backgroundImageView);
 
         profileImageView.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +100,7 @@ public class RegisterPageActivity extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(RegisterPageActivity.this, "Fails ro create user: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterPageActivity.this, "Fails create user: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -112,8 +109,10 @@ public class RegisterPageActivity extends AppCompatActivity {
         }
     }
 
+
     private void uploadUserData(){
         if (profileImageUrl != null){
+
             String imageName = usernameInput.getText().toString() + "." + getExtension(profileImageUrl);
             final StorageReference imageRef = storageReference.child(imageName);
 
@@ -129,6 +128,7 @@ public class RegisterPageActivity extends AppCompatActivity {
                     return imageRef.getDownloadUrl();
                 }
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
                     if (task.isSuccessful()){
@@ -151,7 +151,7 @@ public class RegisterPageActivity extends AppCompatActivity {
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(RegisterPageActivity.this, "Fails to create user and upload data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterPageActivity.this, "Fails to create user: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
                     }

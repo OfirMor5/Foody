@@ -2,29 +2,38 @@ package com.example.foody.fragments;
 
 import com.example.foody.R;
 import com.example.foody.model.Post;
-import com.example.foody.model.PostModel;
+import com.example.foody.model.Model;
+import com.squareup.picasso.Picasso;
 
+import java.util.LinkedList;
+import java.util.List;
 import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import java.util.List;
 
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import de.hdodenhof.circleimageview.CircleImageView;
+
+import androidx.annotation.NonNull;
 
 public class FeedListFrag extends Fragment {
 
-
     RecyclerView list;
-    List<Post> data;
+    List<Post> data = new LinkedList<>();
+    FeedListAdapter adapter;
+    FeedListModel viewModel;
+    LiveData<List<Post>> liveData;
 
     public interface Delegate{
         void onItemSelected(Post post);
@@ -33,7 +42,6 @@ public class FeedListFrag extends Fragment {
     Delegate parent;
 
     public FeedListFrag() {
-        data = PostModel.instance.getAllPosts();
     }
 
     @Override
@@ -45,12 +53,14 @@ public class FeedListFrag extends Fragment {
         else {
             throw new RuntimeException(context.toString() + " must implement Delegate");
         }
+
+        viewModel = new ViewModelProvider(this).get(FeedListModel.class);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_feedlist, container, false);
 
         list = view.findViewById(R.id.feed_list_list);
@@ -59,7 +69,7 @@ public class FeedListFrag extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         list.setLayoutManager(layoutManager);
 
-        FeedListAdapter adapter = new FeedListAdapter();
+        adapter = new FeedListAdapter();
         list.setAdapter(adapter);
 
         adapter.setOnClickListener(new OnItemClickListener() {
@@ -68,6 +78,29 @@ public class FeedListFrag extends Fragment {
                 Log.d("TAG", "Row was clicked" + position);
                 Post post = data.get(position);
                 parent.onItemSelected(post);
+            }
+        });
+
+        liveData = viewModel.getData();
+        liveData.observe(getViewLifecycleOwner(), new Observer<List<Post>>() {
+            @Override
+            public void onChanged(List<Post> posts) {
+                data = posts;
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        final SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.feed_list_swipe_refresh);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                viewModel.refresh(new Model.CompListener() {
+                    @Override
+                    public void onComplete() {
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                });
             }
         });
 
@@ -85,15 +118,17 @@ public class FeedListFrag extends Fragment {
         TextView postTitle;
         ImageView postImg;
         TextView username;
-        ImageView userProfilePic;
+        CircleImageView userProfilePic;
         Post post;
 
         public PostRowViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
+
             super(itemView);
             postTitle = itemView.findViewById(R.id.row_post_title_text_view);
             postImg = itemView.findViewById(R.id.row_post_image_view);
             username = itemView.findViewById(R.id.row_username_text_view);
             userProfilePic = itemView.findViewById(R.id.row_profile_image_view);
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -110,8 +145,15 @@ public class FeedListFrag extends Fragment {
         public void bind(Post postToBind){
             postTitle.setText(postToBind.postTitle);
             username.setText(postToBind.username);
-            //implement images
             post = postToBind;
+            if (postToBind.postImgUrl != null && postToBind.userProfileImageUrl != null){
+                Picasso.get().load(postToBind.postImgUrl).noPlaceholder().into(postImg);
+                Picasso.get().load(postToBind.userProfileImageUrl).noPlaceholder().into(userProfilePic);
+            }
+            else {
+                postImg.setImageResource(R.drawable.profile_pic_placeholde);
+                userProfilePic.setImageResource(R.drawable.profile_pic_placeholde);
+            }
         }
     }
 
