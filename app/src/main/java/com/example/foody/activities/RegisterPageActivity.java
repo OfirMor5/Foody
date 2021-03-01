@@ -1,5 +1,6 @@
 package com.example.foody.activities;
 
+import com.example.foody.Models.ModelFirebase;
 import com.example.foody.R;
 import com.example.foody.Utils;
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.Continuation;
@@ -43,6 +45,7 @@ public class RegisterPageActivity extends AppCompatActivity {
     EditText passwordInput;
     EditText emailInput;
     Button registerBtn;
+    ProgressBar progressBar;
     CircleImageView profileImageView;
 
     //Firebase
@@ -51,7 +54,7 @@ public class RegisterPageActivity extends AppCompatActivity {
     StorageReference storageReference;
 
     //for opening gallery
-    Uri profileImageUrl;
+    Uri profileImageUrl = null;
     static int REQUEST_CODE = 1;
 
     @Override
@@ -79,7 +82,7 @@ public class RegisterPageActivity extends AppCompatActivity {
         profileImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                chooseImageFromGallery();
+                Utils.chooseImageFromGallery(com.example.foody.activities.RegisterPageActivity.this);
             }
         });
 
@@ -87,10 +90,24 @@ public class RegisterPageActivity extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference("images");
 
+
+        registerBtn = findViewById(R.id.register_activity_register_btn);
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                registerUserAccount();
+                progressBar.setVisibility(View.VISIBLE);
+                ModelFirebase.registerUserAccount(usernameInput.getText().toString(), passwordInput.getText().toString(), emailInput.getText().toString(), profileImageUrl, new ModelFirebase.Listener<Boolean>() {
+                    @Override
+                    public void onComplete() {
+                        progressBar.setVisibility(View.INVISIBLE);
+                        com.example.foody.activities.RegisterPageActivity.this.finish();
+                    }
+
+                    @Override
+                    public void onFail() {
+                        progressBar.setVisibility(View.INVISIBLE);
+                    }
+                });
             }
         });
     }
