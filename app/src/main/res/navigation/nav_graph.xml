@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_postrecipe" >
         <argument
             android:name="post"
-            app:argType="com.lilo.museboxapp.model.Post" />
+            app:argType="com.example.foody.model.Post" />
     </fragment>
 
     <fragment

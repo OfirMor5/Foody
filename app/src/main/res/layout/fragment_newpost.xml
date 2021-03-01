@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/new_post_fragment_title_rdit_text"
+        android:id="@+id/new_post_fragment_title_edit_text"
         android:layout_width="0dp"
         android:layout_height="37dp"
         android:layout_marginStart="24dp"
@@ -58,7 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_post_fragment_title_rdit_text" />
+        app:layout_constraintTop_toBottomOf="@+id/new_post_fragment_title_edit_text" />
 
     <EditText
         android:id="@+id/new_post_fragment_contact_edit_text"
@@ -92,6 +92,7 @@
         android:textSize="18sp"
         app:backgroundTint="#1C1A1A"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/new_post_fragment_image_view" />
 
@@ -108,5 +109,21 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/new_post_fragment_contact_edit_text" />
+
+    <ProgressBar
+        android:id="@+id/new_post_fragment_progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alpha="0.8"
+        android:background="#21211e"
+        android:hapticFeedbackEnabled="false"
+        android:padding="150dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

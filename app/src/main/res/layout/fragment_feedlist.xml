@@ -6,8 +6,15 @@
     android:orientation="vertical"
     tools:context=".fragments.FeedListFrag" >
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/feed_list_list"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:id="@+id/feed_list_swipe_refresh">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/feed_list_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 </LinearLayout>
