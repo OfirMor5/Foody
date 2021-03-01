@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".fragments.PostRecipeFrag" >
+
+    <TextView
+        android:id="@+id/new_post_fragment_header_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="New Post"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/new_post_fragment_title_rdit_text"
+        android:layout_width="0dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="#242626"
+        android:ems="10"
+        android:hint="Title"
+        android:inputType="textPersonName"
+        android:padding="6dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#CDCDCD"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_post_fragment_header_text_view" />
+
+    <EditText
+        android:id="@+id/new_post_fragment_content_edit_text"
+        android:layout_width="369dp"
+        android:layout_height="210dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="#242626"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="write your recipe here..."
+        android:inputType="textMultiLine"
+        android:padding="6dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#CDCDCD"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_post_fragment_title_rdit_text" />
+
+    <EditText
+        android:id="@+id/new_post_fragment_contact_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="#242626"
+        android:ems="10"
+        android:hint="Contact"
+        android:inputType="textPersonName"
+        android:padding="6dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#CDCDCD"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_post_fragment_content_edit_text" />
+
+    <Button
+        android:id="@+id/new_post_fragment_publish_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="#21211e"
+        android:text="Publish"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:backgroundTint="#1C1A1A"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_post_fragment_image_view" />
+
+    <ImageView
+        android:id="@+id/new_post_fragment_image_view"
+        android:layout_width="365dp"
+        android:layout_height="236dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/addimage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_post_fragment_contact_edit_text" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,16 +1,22 @@
 package com.example.foody.activities;
+
 import com.example.foody.R;
 import com.example.foody.Utils;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-
-import android.util.Log;
+import androidx.annotation.NonNull;
+import android.widget.Toast;
 import android.view.View;
 import android.content.Intent;
+
 
 public class LoginPageActivity extends AppCompatActivity {
 
@@ -19,6 +25,7 @@ public class LoginPageActivity extends AppCompatActivity {
     EditText passwordInput;
     Button loginBtn;
     Button registerBtn;
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,24 +37,52 @@ public class LoginPageActivity extends AppCompatActivity {
         backgroundImageView = findViewById(R.id.login_activity_background_image_view);
         emailInput = findViewById(R.id.login_activity_email_edit_text);
         passwordInput = findViewById(R.id.login_activity_password_edit_text);
-        loginBtn = findViewById(R.id.login_activity_login_btn);
-
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("TAG", "Attempt to login");
-            }
-        });
-
         registerBtn = findViewById(R.id.login_activity_register_btn);
+
+
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 toRegisterPage();
             }
         });
-        Utils.animateBackground(backgroundImageView);
 
+        loginBtn = findViewById(R.id.login_activity_login_btn);
+
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loginUser();
+            }
+        });
+        Utils.animateBackground(backgroundImageView);
+    }
+
+    private void loginUser(){
+        if (!emailInput.getText().toString().isEmpty() && !passwordInput.getText().toString().isEmpty()){
+            if (firebaseAuth.getCurrentUser() == null){
+                firebaseAuth.signInWithEmailAndPassword(emailInput.getText().toString(), passwordInput.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        Toast.makeText(LoginPageActivity.this, "Welcome!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(LoginPageActivity.this, HomeActivity.class));
+                        LoginPageActivity.this.finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(LoginPageActivity.this, "Failed to login: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+            else {
+                firebaseAuth.signOut();
+                Toast.makeText(this, "Previous user signed out, please try again now", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else {
+            Toast.makeText(this, "Please fill both data fields", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void toRegisterPage(){

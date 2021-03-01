@@ -64,14 +64,6 @@ public class RegisterPageActivity extends AppCompatActivity {
         emailInput = findViewById(R.id.register_activity_email_edit_text);
         profileImageView = findViewById(R.id.register_activity_profile_image_view);
 
-        registerBtn = findViewById(R.id.register_activity_register_btn);
-        registerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("TAG", "Attempt to register");
-                //registering on firebase and popping back to login screen - to implement
-            }
-        });
 
         backgroundImageView = findViewById(R.id.register_activity_background_image_view);
         Utils.animateBackground(backgroundImageView);
@@ -86,6 +78,7 @@ public class RegisterPageActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference("images");
+        registerBtn = findViewById(R.id.register_activity_register_btn);
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,7 +108,7 @@ public class RegisterPageActivity extends AppCompatActivity {
             });
         }
         else {
-            Toast.makeText(this, "Please check input fields or profile image again...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please fill all input fields", Toast.LENGTH_SHORT).show();
         }
     }
 
