@@ -3,11 +3,11 @@ package com.example.foody.model;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
 import java.io.Serializable;
 
 @Entity
-public class Post implements Serializable{
-
+public class Post implements Serializable {
     @PrimaryKey
     @NonNull
     public String postId;
@@ -15,23 +15,36 @@ public class Post implements Serializable{
     public String postContent;
     public String postImgUrl;
     public String userId;
-    public String userProfilePicUrl;
+    public String userProfileImageUrl;
     public String username;
-    public String contact;
     public long lastUpdated;
 
+    //-----------------------------------------------------------------------------------------------------
+
     public Post(){
+        postId = "";
+        postTitle = "";
+        postContent = "";
+        postImgUrl = "";
+        userId = "";
+        userProfileImageUrl = "";
+        username = "";
+        lastUpdated = 0;
     }
 
     public Post(String postId, String postTitle, String postContent, String postImgUrl, String userId, String userProfilePicUrl, String username){
+
         this.postId = postId;
         this.postTitle = postTitle;
         this.postContent = postContent;
         this.postImgUrl = postImgUrl;
         this.userId = userId;
-        this.userProfilePicUrl = userProfilePicUrl;
+        this.userProfileImageUrl = userProfilePicUrl;
         this.username = username;
+
     }
+
+    //-----------------------------------------------------------------------------------------------------
 
     @NonNull
     public String getPostId() {
@@ -70,18 +83,6 @@ public class Post implements Serializable{
         return userId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getUserProfilePicUrl() {
-        return userProfilePicUrl;
-    }
-
-    public void setUserProfilePicUrl(String userProfilePicUrl) {
-        this.userProfilePicUrl = userProfilePicUrl;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -97,5 +98,18 @@ public class Post implements Serializable{
     public void setLastUpdated(long lastUpdated) {
         this.lastUpdated = lastUpdated;
     }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserProfileImageUrl() {
+        return userProfileImageUrl;
+    }
+
+    public void setUserProfileImageUrl(String userProfileImageUrl) {
+        this.userProfileImageUrl = userProfileImageUrl;
+    }
+
 
 }
