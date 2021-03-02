@@ -34,12 +34,9 @@ public class FeedListFrag extends Fragment {
     FeedListAdapter adapter;
     FeedListModel viewModel;
     LiveData<List<Post>> liveData;
-
-    public interface Delegate{
-        void onItemSelected(Post post);
-    }
-
     Delegate parent;
+
+    //-----------------------------------------------------------------------------------------------------
 
     public FeedListFrag() {
     }
@@ -56,6 +53,8 @@ public class FeedListFrag extends Fragment {
 
         viewModel = new ViewModelProvider(this).get(FeedListModel.class);
     }
+
+    //-----------------------------------------------------------------------------------------------------
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -85,7 +84,8 @@ public class FeedListFrag extends Fragment {
         liveData.observe(getViewLifecycleOwner(), new Observer<List<Post>>() {
             @Override
             public void onChanged(List<Post> posts) {
-                data = posts;
+                List<Post> reversedData = reverseData(posts);
+                data = reversedData;
                 adapter.notifyDataSetChanged();
             }
         });
@@ -107,10 +107,28 @@ public class FeedListFrag extends Fragment {
         return view;
     }
 
+    //-----------------------------------------------------------------------------------------------------
+
+    private List<Post> reverseData(List<Post> posts) {
+        List<Post> reversedData = new LinkedList<>();
+        for (Post post: posts) {
+            reversedData.add(0, post);
+        }
+        return reversedData;
+    }
+
     @Override
     public void onDetach() {
         super.onDetach();
         parent = null;
+    }
+
+    interface OnItemClickListener {
+        void onClick(int position);
+    }
+
+    public interface Delegate{
+        void onItemSelected(Post post);
     }
 
     static class PostRowViewHolder extends RecyclerView.ViewHolder {
@@ -157,9 +175,7 @@ public class FeedListFrag extends Fragment {
         }
     }
 
-    interface OnItemClickListener {
-        void onClick(int position);
-    }
+
 
     class FeedListAdapter extends RecyclerView.Adapter<PostRowViewHolder>{
 

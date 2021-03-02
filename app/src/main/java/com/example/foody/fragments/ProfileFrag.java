@@ -5,6 +5,7 @@ import com.example.foody.Utils;
 import com.example.foody.model.User;
 import com.squareup.picasso.Picasso;
 
+import android.content.Context;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,6 +14,12 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
+
+
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -24,6 +31,8 @@ public class ProfileFrag extends Fragment {
     CircleImageView userProfileImage;
     ImageButton editProfileBtn;
     ImageView backgroundImageView;
+
+    //-----------------------------------------------------------------------------------------------------
 
     public ProfileFrag() {
     }
@@ -44,13 +53,26 @@ public class ProfileFrag extends Fragment {
         editProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //implement edit page fragment comes up
+                toEditProfilePage();
             }
         });
 
         Utils.animateBackground(backgroundImageView);
         setUserProfile();
         return view;
+    }
+
+    //-----------------------------------------------------------------------------------------------------
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+    }
+
+    private void toEditProfilePage() {
+        NavController navCtrl = Navigation.findNavController(getActivity(), R.id.home_nav_host);
+        NavDirections directions = ProfileFragDirections.actionProfileFragmentToEditProfileFragment();
+        navCtrl.navigate(directions);
     }
 
     public void setUserProfile(){

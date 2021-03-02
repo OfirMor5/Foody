@@ -50,6 +50,8 @@ public class NewPostFrag extends Fragment {
     Bitmap postImgBitmap;
     static int REQUEST_CODE = 1;
 
+    //-----------------------------------------------------------------------------------------------------
+
     public NewPostFrag() {
     }
 
@@ -82,6 +84,8 @@ public class NewPostFrag extends Fragment {
 
         return view;
     }
+
+    //-----------------------------------------------------------------------------------------------------
 
     void savePost(){
         progressBar.setVisibility(View.VISIBLE);

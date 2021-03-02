@@ -21,4 +21,5 @@ public class FeedListModel extends ViewModel {
     public void refresh(Model.CompListener listener){
         Model.instance.refreshPostsList(listener);
     }
+
 }
