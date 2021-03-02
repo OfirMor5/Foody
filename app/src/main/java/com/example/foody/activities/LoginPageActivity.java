@@ -3,6 +3,11 @@ package com.example.foody.activities;
 import com.example.foody.R;
 import com.example.foody.Utils;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+import com.example.foody.model.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+>>>>>>> parent of c69de9a (Cleaned the code, added delete function, clean localdb function and more)
 =======
 import com.example.foody.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -46,10 +51,14 @@ public class LoginPageActivity extends AppCompatActivity {
         emailInput = findViewById(R.id.login_activity_email_edit_text);
         passwordInput = findViewById(R.id.login_activity_password_edit_text);
         registerBtn = findViewById(R.id.login_activity_register_btn);
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 
 =======
+>>>>>>> parent of c69de9a (Cleaned the code, added delete function, clean localdb function and more)
+=======
+
 >>>>>>> parent of c69de9a (Cleaned the code, added delete function, clean localdb function and more)
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,8 +129,11 @@ public class LoginPageActivity extends AppCompatActivity {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 =======
+=======
+>>>>>>> parent of c69de9a (Cleaned the code, added delete function, clean localdb function and more)
     private void setUserAppData(final String email){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("userProfileData").document(email).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
