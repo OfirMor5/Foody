@@ -27,6 +27,8 @@ public class HomeActivity extends AppCompatActivity implements FeedListFrag.Dele
         NavigationUI.setupWithNavController(bottomNav, navC);
     }
 
+    //-----------------------------------------------------------------------------------------------------
+
     @Override
     public void onItemSelected(Post post) {
         navC = Navigation.findNavController(this, R.id.home_nav_host);

@@ -29,6 +29,7 @@ import com.google.firebase.storage.UploadTask;
 import java.util.HashMap;
 import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,8 +41,9 @@ public class RegisterPageActivity extends AppCompatActivity {
     EditText usernameInput;
     EditText passwordInput;
     EditText emailInput;
-    Button registerBtn;
+    Button registerB;
     CircleImageView profileImageView;
+    ImageButton closeB;
 
     FirebaseFirestore firebaseFirestore;
     FirebaseAuth firebaseAuth;
@@ -50,6 +52,8 @@ public class RegisterPageActivity extends AppCompatActivity {
     //Open gallery
     Uri profileImageUrl;
     static int REQUEST_CODE = 1;
+
+    //-----------------------------------------------------------------------------------------------------
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,15 +79,27 @@ public class RegisterPageActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference("images");
-        registerBtn = findViewById(R.id.register_activity_register_btn);
+        registerB = findViewById(R.id.register_activity_register_btn);
 
-        registerBtn.setOnClickListener(new View.OnClickListener() {
+        registerB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 registerUserAccount();
             }
         });
+
+        closeB = findViewById(R.id.register_activity_close_btn);
+        closeB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RegisterPageActivity.this.finish();
+            }
+        });
+
     }
+
+    //-----------------------------------------------------------------------------------------------------
+
 
     private void registerUserAccount(){
 
@@ -110,6 +126,8 @@ public class RegisterPageActivity extends AppCompatActivity {
     }
 
 
+    //-----------------------------------------------------------------------------------------------------
+
     private void uploadUserData(){
         if (profileImageUrl != null){
 
@@ -117,8 +135,8 @@ public class RegisterPageActivity extends AppCompatActivity {
             final StorageReference imageRef = storageReference.child(imageName);
 
             Toast.makeText(this, "Uploading user data...", Toast.LENGTH_SHORT).show();
-
             UploadTask uploadTask = imageRef.putFile(profileImageUrl);
+
             uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -165,6 +183,8 @@ public class RegisterPageActivity extends AppCompatActivity {
             Toast.makeText(this, "Please choose a profile image", Toast.LENGTH_SHORT).show();
         }
     }
+
+    //-----------------------------------------------------------------------------------------------------
 
     private String getExtension(Uri uri){
         try{
