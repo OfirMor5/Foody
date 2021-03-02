@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/feedListFragment">
+
+    <fragment
+        android:id="@+id/feedListFragment"
+        android:name="com.example.foody.fragments.FeedListFrag"
+        android:label="Feed"
+        tools:layout="@layout/fragment_feedlist" >
+        <action
+            android:id="@+id/action_feedListFragment_to_postDetailsFragment"
+            app:destination="@id/postDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/postDetailsFragment"
+        android:name="com.example.foody.fragments.PostRecipeFrag"
+        android:label="Post Details"
+        tools:layout="@layout/fragment_postrecipe" >
+        <argument
+            android:name="post"
+            app:argType="com.lilo.museboxapp.model.Post" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/newPostFragment"
+        android:name="com.example.foody.fragments.NewPostFrag"
+        android:label="fragment_new_post"
+        tools:layout="@layout/fragment_newpost" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.foody.fragments.ProfileFrag"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+
+</navigation>
