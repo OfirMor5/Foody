@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 import java.util.List;
+import android.util.Log;
+
 
 import android.annotation.SuppressLint;
 
@@ -22,6 +24,8 @@ public class Model {
     private Model(){
     }
 
+    //-----------------------------------------------------------------------------------------------------
+
     @SuppressLint("StaticFieldLeak")
     public void addPost(final Post post, Listener<Boolean> listener) {
         ModelFirebase.addPost(post,listener);
@@ -33,6 +37,20 @@ public class Model {
             }
         }.execute();
     }
+
+
+    @SuppressLint("StaticFieldLeak")
+    public void deletePost(final Post post, Listener<Boolean> listener){
+        ModelFirebase.deletePost(post,listener);
+        new AsyncTask<String,String,String>(){
+            @Override
+            protected String doInBackground(String... strings) {
+                AppLocalDB.db.postDao().deletePost(post);
+                return "";
+            }
+        }.execute();
+    }
+
 
     public void refreshPostsList(final CompListener listener){
         long lastUpdated = FoodyApp.context.getSharedPreferences("TAG", Context.MODE_PRIVATE).getLong("PostsLastUpdateDate",0);
@@ -57,6 +75,7 @@ public class Model {
                     @Override
                     protected void onPostExecute(String s) {
                         super.onPostExecute(s);
+                        cleanLocalDb();
                         if (listener!=null)
                             listener.onComplete();
                     }
@@ -65,6 +84,27 @@ public class Model {
         });
     }
 
+    @SuppressLint("StaticFieldLeak")
+    private void cleanLocalDb(){
+        ModelFirebase.getDeletedPostsId(new Listener<List<String>>() {
+            @Override
+            public void onComplete(final List<String> data) {
+                new AsyncTask<String,String,String>() {
+                    @Override
+                    protected String doInBackground(String... strings) {
+                        for (String id: data){
+                            Log.d("TAG", "deleted id: " + id);
+                            AppLocalDB.db.postDao().deleteByPostId(id);
+                        }
+                        return "";
+                    }
+                }.execute("");
+            }
+        });
+    }
+
+    //-----------------------------------------------------------------------------------------------------
+
     public LiveData<List<Post>> getAllPosts(){
         LiveData<List<Post>> liveData = AppLocalDB.db.postDao().getAllPosts();
         refreshPostsList(null);
@@ -72,17 +112,12 @@ public class Model {
     }
 
 
-    public Post getPost(String id){
-
-        return null;
+    public void updateUserProfile(String username, String info, String profileImgUrl, Listener<Boolean> listener) {
+        ModelFirebase.updateUserProfile(username, info, profileImgUrl, listener);
     }
 
-    public void update(Post post){
-
-    }
-
-    public void delete(Post post){
-
+    public void setUserAppData(String email){
+        ModelFirebase.setUserAppData(email);
     }
 
 }

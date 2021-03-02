@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "c084b37279f6d8e476e959c3557f9a95",
+    "identityHash": "4887fe0af306ec72bd374173b0f265ba",
     "entities": [
       {
         "tableName": "Post",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`postId` TEXT NOT NULL, `postTitle` TEXT, `postContent` TEXT, `postImgUrl` TEXT, `userId` TEXT, `userProfilePicUrl` TEXT, `username` TEXT, `contact` TEXT, `lastUpdated` INTEGER NOT NULL, PRIMARY KEY(`postId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`postId` TEXT NOT NULL, `postTitle` TEXT, `postContent` TEXT, `postImgUrl` TEXT, `userId` TEXT, `userProfileImageUrl` TEXT, `username` TEXT, `lastUpdated` INTEGER NOT NULL, PRIMARY KEY(`postId`))",
         "fields": [
           {
             "fieldPath": "postId",
@@ -39,20 +39,14 @@
             "notNull": false
           },
           {
-            "fieldPath": "userProfilePicUrl",
-            "columnName": "userProfilePicUrl",
+            "fieldPath": "userProfileImageUrl",
+            "columnName": "userProfileImageUrl",
             "affinity": "TEXT",
             "notNull": false
           },
           {
             "fieldPath": "username",
             "columnName": "username",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "contact",
-            "columnName": "contact",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -76,7 +70,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c084b37279f6d8e476e959c3557f9a95')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4887fe0af306ec72bd374173b0f265ba')"
     ]
   }
 }
