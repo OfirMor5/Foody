@@ -2,10 +2,18 @@ package com.example.foody.activities;
 
 import com.example.foody.R;
 import com.example.foody.Utils;
+<<<<<<< HEAD
+=======
+import com.example.foody.model.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+>>>>>>> parent of c69de9a (Cleaned the code, added delete function, clean localdb function and more)
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,7 +47,10 @@ public class LoginPageActivity extends AppCompatActivity {
         passwordInput = findViewById(R.id.login_activity_password_edit_text);
         registerBtn = findViewById(R.id.login_activity_register_btn);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of c69de9a (Cleaned the code, added delete function, clean localdb function and more)
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,6 +90,24 @@ public class LoginPageActivity extends AppCompatActivity {
                 firebaseAuth.signOut();
                 Toast.makeText(this, "Previous user signed out, please try again now", Toast.LENGTH_SHORT).show();
             }
+<<<<<<< HEAD
+=======
+
+            firebaseAuth.signInWithEmailAndPassword(emailInput.getText().toString(), passwordInput.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                @Override
+                public void onSuccess(AuthResult authResult) {
+                    Toast.makeText(LoginPageActivity.this, "Welcome!", Toast.LENGTH_SHORT).show();
+                    setUserAppData(emailInput.getText().toString());
+                    startActivity(new Intent(LoginPageActivity.this, HomeActivity.class));
+                    LoginPageActivity.this.finish();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(LoginPageActivity.this, "Failed to login: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+>>>>>>> parent of c69de9a (Cleaned the code, added delete function, clean localdb function and more)
         }
         else {
             Toast.makeText(this, "Please fill both data fields", Toast.LENGTH_SHORT).show();
@@ -90,4 +119,25 @@ public class LoginPageActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+<<<<<<< HEAD
 }
+=======
+    private void setUserAppData(final String email){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("userProfileData").document(email).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    User.getInstance().userUsername = (String) task.getResult().get("username");
+                    User.getInstance().profileImageUrl = (String) task.getResult().get("profileImageUrl");
+                    User.getInstance().userInfo = (String) task.getResult().get("info");
+                    User.getInstance().userEmail = email;
+                    User.getInstance().userId = firebaseAuth.getUid();
+                }
+            }
+        });
+    }
+
+}
+
+>>>>>>> parent of c69de9a (Cleaned the code, added delete function, clean localdb function and more)

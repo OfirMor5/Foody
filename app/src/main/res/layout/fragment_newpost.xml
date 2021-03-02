@@ -60,6 +60,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/new_post_fragment_title_edit_text" />
 
+    <EditText
+        android:id="@+id/new_post_fragment_contact_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="#242626"
+        android:ems="10"
+        android:hint="Contact"
+        android:inputType="textPersonName"
+        android:padding="6dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#CDCDCD"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_post_fragment_content_edit_text" />
 
     <Button
         android:id="@+id/new_post_fragment_publish_btn"
@@ -83,14 +101,14 @@
         android:layout_width="365dp"
         android:layout_height="236dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:scaleType="centerCrop"
         android:src="@drawable/addimage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_post_fragment_content_edit_text" />
+        app:layout_constraintTop_toBottomOf="@+id/new_post_fragment_contact_edit_text" />
 
     <ProgressBar
         android:id="@+id/new_post_fragment_progress_bar"
@@ -103,7 +121,7 @@
         android:padding="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />

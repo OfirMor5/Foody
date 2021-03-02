@@ -34,6 +34,13 @@ import com.google.firebase.storage.UploadTask;
 import java.util.HashMap;
 import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
+<<<<<<< HEAD
+=======
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+>>>>>>> parent of c69de9a (Cleaned the code, added delete function, clean localdb function and more)
 
 public class RegisterPageActivity extends AppCompatActivity {
 
@@ -112,6 +119,10 @@ public class RegisterPageActivity extends AppCompatActivity {
         }
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> parent of c69de9a (Cleaned the code, added delete function, clean localdb function and more)
     private void uploadUserData(){
         if (profileImageUrl != null){
             String imageName = usernameInput.getText().toString() + "." + getExtension(profileImageUrl);

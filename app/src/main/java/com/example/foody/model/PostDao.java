@@ -21,10 +21,4 @@ public interface PostDao {
     void insertAllPosts(Post... posts);
     @Delete
     void deletePost(Post post);
-
-    @Query("select exists(select * from Post where postId = :postId)")
-    boolean isPostExists(String postId);
-
-    @Query("delete from Post where postId = :postId")
-    void deleteByPostId(String postId);
 }
