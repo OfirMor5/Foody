@@ -59,8 +59,8 @@ public class ModelFirebase {
         });
     }
 
-    public static void deletePost(final Post post, final Model.Listener<Boolean> listener) {
-        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+        public static void deletePost(final Post post, final Model.Listener<Boolean> listener) {
+          final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection(POST_COLLECTION).document(post.getPostId()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

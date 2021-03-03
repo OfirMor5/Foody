@@ -19,6 +19,8 @@ public class Post implements Serializable {
     public String username;
     public long lastUpdated;
 
+    //-----------------------------------------------------------------------------------------------------
+
     public Post(){
         postId = "";
         postTitle = "";
@@ -41,6 +43,8 @@ public class Post implements Serializable {
         this.username = username;
 
     }
+
+    //-----------------------------------------------------------------------------------------------------
 
     @NonNull
     public String getPostId() {

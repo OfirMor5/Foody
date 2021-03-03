@@ -40,8 +40,8 @@
 
     <EditText
         android:id="@+id/edit_post_fragment_content_edit_text"
-        android:layout_width="358dp"
-        android:layout_height="235dp"
+        android:layout_width="359dp"
+        android:layout_height="162dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
@@ -76,8 +76,8 @@
 
     <ImageView
         android:id="@+id/edit_post_fragment_image_view"
-        android:layout_width="0dp"
-        android:layout_height="237dp"
+        android:layout_width="364dp"
+        android:layout_height="215dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="24dp"

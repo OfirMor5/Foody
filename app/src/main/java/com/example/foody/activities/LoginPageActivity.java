@@ -2,15 +2,11 @@ package com.example.foody.activities;
 
 import com.example.foody.R;
 import com.example.foody.Utils;
-import com.example.foody.model.User;
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.example.foody.model.Model;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -29,9 +25,11 @@ public class LoginPageActivity extends AppCompatActivity {
     ImageView backgroundImageView;
     EditText emailInput;
     EditText passwordInput;
-    Button loginBtn;
-    Button registerBtn;
+    Button loginB;
+    Button registerB;
     FirebaseAuth firebaseAuth;
+
+    //-----------------------------------------------------------------------------------------------------
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,18 +43,18 @@ public class LoginPageActivity extends AppCompatActivity {
         backgroundImageView = findViewById(R.id.login_activity_background_image_view);
         emailInput = findViewById(R.id.login_activity_email_edit_text);
         passwordInput = findViewById(R.id.login_activity_password_edit_text);
-        registerBtn = findViewById(R.id.login_activity_register_btn);
+        registerB = findViewById(R.id.login_activity_register_btn);
 
-        registerBtn.setOnClickListener(new View.OnClickListener() {
+        registerB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 toRegisterPage();
             }
         });
 
-        loginBtn = findViewById(R.id.login_activity_login_btn);
+        loginB = findViewById(R.id.login_activity_login_btn);
 
-        loginBtn.setOnClickListener(new View.OnClickListener() {
+        loginB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                  loginUser();
@@ -65,6 +63,9 @@ public class LoginPageActivity extends AppCompatActivity {
         Utils.animateBackground(backgroundImageView);
 
     }
+
+    //-----------------------------------------------------------------------------------------------------
+
 
     private void loginUser(){
 
@@ -77,10 +78,12 @@ public class LoginPageActivity extends AppCompatActivity {
             firebaseAuth.signInWithEmailAndPassword(emailInput.getText().toString(), passwordInput.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {
+
                     Toast.makeText(LoginPageActivity.this, "Welcome!", Toast.LENGTH_SHORT).show();
-                    setUserAppData(emailInput.getText().toString());
+                    Model.instance.setUserAppData(emailInput.getText().toString());
                     startActivity(new Intent(LoginPageActivity.this, HomeActivity.class));
                     LoginPageActivity.this.finish();
+
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -92,6 +95,7 @@ public class LoginPageActivity extends AppCompatActivity {
         else {
             Toast.makeText(this, "Please fill both data fields", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     private void toRegisterPage(){
@@ -99,21 +103,6 @@ public class LoginPageActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void setUserAppData(final String email){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("userProfileData").document(email).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()){
-                    User.getInstance().userUsername = (String) task.getResult().get("username");
-                    User.getInstance().profileImageUrl = (String) task.getResult().get("profileImageUrl");
-                    User.getInstance().userInfo = (String) task.getResult().get("info");
-                    User.getInstance().userEmail = email;
-                    User.getInstance().userId = firebaseAuth.getUid();
-                }
-            }
-        });
-    }
 
 }
 
