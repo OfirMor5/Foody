@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_postDetailsFragment_to_editPostFragment"
             app:destination="@id/editPostFragment" />
+        <action
+            android:id="@+id/action_postDetailsFragment_to_commentListFragment"
+            app:destination="@id/commentListFragment" />
     </fragment>
 
     <fragment
@@ -52,6 +55,15 @@
         android:name="com.example.foody.fragments.EditPostFrag"
         android:label="fragment_edit_post"
         tools:layout="@layout/fragment_editpost" >
+        <argument
+            android:name="post"
+            app:argType="com.example.foody.model.Post" />
+    </fragment>
+    <fragment
+        android:id="@+id/commentListFragment"
+        android:name="com.example.foody.fragments.CommentListFrag"
+        android:label="fragment_comment_list"
+        tools:layout="@layout/fragment_comment" >
         <argument
             android:name="post"
             app:argType="com.example.foody.model.Post" />

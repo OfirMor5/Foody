@@ -57,7 +57,7 @@ public class ProfileFrag extends Fragment {
             }
         });
 
-        Utils.animateBackground(backgroundImageView);
+        Utils.animateBackground(backgroundImageView, 30000);
         setUserProfile();
         return view;
     }

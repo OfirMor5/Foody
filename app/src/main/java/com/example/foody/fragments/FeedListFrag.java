@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -74,7 +75,6 @@ public class FeedListFrag extends Fragment {
         adapter.setOnClickListener(new OnItemClickListener() {
             @Override
             public void onClick(int position) {
-                Log.d("TAG", "Row was clicked" + position);
                 Post post = data.get(position);
                 parent.onItemSelected(post);
             }
@@ -123,13 +123,13 @@ public class FeedListFrag extends Fragment {
         parent = null;
     }
 
-    interface OnItemClickListener {
-        void onClick(int position);
-    }
+
 
     public interface Delegate{
         void onItemSelected(Post post);
     }
+
+    //-----------------------------------------------------------------------------------------------------
 
     static class PostRowViewHolder extends RecyclerView.ViewHolder {
 
@@ -138,6 +138,7 @@ public class FeedListFrag extends Fragment {
         TextView username;
         CircleImageView userProfilePic;
         Post post;
+        ProgressBar progressBar;
 
         public PostRowViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
 
@@ -146,6 +147,7 @@ public class FeedListFrag extends Fragment {
             postImg = itemView.findViewById(R.id.row_post_image_view);
             username = itemView.findViewById(R.id.row_username_text_view);
             userProfilePic = itemView.findViewById(R.id.row_profile_image_view);
+          //  progressBar = itemView.findViewById(R.id.row_post_progress_bar);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -159,6 +161,8 @@ public class FeedListFrag extends Fragment {
                 }
             });
         }
+
+        //-----------------------------------------------------------------------------------------------------
 
         public void bind(Post postToBind){
             postTitle.setText(postToBind.postTitle);
@@ -174,6 +178,11 @@ public class FeedListFrag extends Fragment {
             }
         }
     }
+    interface OnItemClickListener {
+        void onClick(int position);
+    }
+
+    //-----------------------------------------------------------------------------------------------------
 
 
 

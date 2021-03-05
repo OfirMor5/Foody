@@ -37,7 +37,6 @@ public class EditPostFrag extends Fragment {
     Post post;
     EditText titleInput;
     EditText contentInput;
-    EditText contactInput;
     Button saveChangesBtn;
     ImageView postImageView;
     ProgressBar progressBar;
@@ -107,6 +106,8 @@ public class EditPostFrag extends Fragment {
         contentInput.setText(post.postContent);
     }
 
+    //-----------------------------------------------------------------------------------------------------
+
     void updatePost() {
 
         progressBar.setVisibility(View.VISIBLE);
@@ -163,6 +164,8 @@ public class EditPostFrag extends Fragment {
         return editedPost;
     }
 
+    //-----------------------------------------------------------------------------------------------------
+
     private void chooseImageFromGallery(){
 
         try{
@@ -175,6 +178,8 @@ public class EditPostFrag extends Fragment {
             Toast.makeText(getContext(), "Edit post Page: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
+
+    //-----------------------------------------------------------------------------------------------------
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -190,6 +195,8 @@ public class EditPostFrag extends Fragment {
             Toast.makeText(getContext(), "No image was selected", Toast.LENGTH_SHORT).show();
         }
     }
+
+    //-----------------------------------------------------------------------------------------------------
 
     private Bitmap uriToBitmap(Uri selectedFileUri) {
         try {

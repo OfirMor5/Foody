@@ -7,6 +7,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import  com.example.foody.FoodyApp;
+import  com.example.foody.model.ModelFirebase;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -57,44 +59,55 @@ public class LoginPageActivity extends AppCompatActivity {
         loginB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 loginUser();
+
+                ModelFirebase.loginUser(emailInput.getText().toString(), passwordInput.getText().toString(), new ModelFirebase.Listener<Boolean>() {
+                    @Override
+                    public void onComplete() {
+                        startActivity(new Intent(LoginPageActivity.this, HomeActivity.class));
+                        LoginPageActivity.this.finish();
+                    }
+                    @Override
+                    public void onFail() {
+//                        Toast.makeText(LoginPageActivity.this, "Failed to login", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
-        Utils.animateBackground(backgroundImageView);
 
-    }
+        Utils.animateBackground(backgroundImageView, 30000);
+
 
     //-----------------------------------------------------------------------------------------------------
 
 
-    private void loginUser(){
-
-        if (!emailInput.getText().toString().isEmpty() && !passwordInput.getText().toString().isEmpty()){
-
-            if (firebaseAuth.getCurrentUser() != null) {
-                firebaseAuth.signOut();
-            }
-
-            firebaseAuth.signInWithEmailAndPassword(emailInput.getText().toString(), passwordInput.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                @Override
-                public void onSuccess(AuthResult authResult) {
-
-                    Toast.makeText(LoginPageActivity.this, "Welcome!", Toast.LENGTH_SHORT).show();
-                    Model.instance.setUserAppData(emailInput.getText().toString());
-                    startActivity(new Intent(LoginPageActivity.this, HomeActivity.class));
-                    LoginPageActivity.this.finish();
-
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(LoginPageActivity.this, "Failed to login: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-        else {
-            Toast.makeText(this, "Please fill both data fields", Toast.LENGTH_SHORT).show();
-        }
+//    private void loginUser(){
+//
+//        if (!emailInput.getText().toString().isEmpty() && !passwordInput.getText().toString().isEmpty()){
+//
+//            if (firebaseAuth.getCurrentUser() != null) {
+//                firebaseAuth.signOut();
+//            }
+//
+//            firebaseAuth.signInWithEmailAndPassword(emailInput.getText().toString(), passwordInput.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+//                @Override
+//                public void onSuccess(AuthResult authResult) {
+//
+//                    Toast.makeText(LoginPageActivity.this, "Welcome!", Toast.LENGTH_SHORT).show();
+//                    Model.instance.setUserAppData(emailInput.getText().toString());
+//                    startActivity(new Intent(LoginPageActivity.this, HomeActivity.class));
+//                    LoginPageActivity.this.finish();
+//
+//                }
+//            }).addOnFailureListener(new OnFailureListener() {
+//                @Override
+//                public void onFailure(@NonNull Exception e) {
+//                    Toast.makeText(LoginPageActivity.this, "Failed to login: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+//                }
+//            });
+//        }
+//        else {
+//            Toast.makeText(this, "Please fill both data fields", Toast.LENGTH_SHORT).show();
+//        }
 
     }
 

@@ -78,7 +78,10 @@ public class NewPostFrag extends Fragment {
         publishBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                savePost();
+                if (postImgUri != null && postTitleInput != null && postContentInput != null )
+                    savePost();
+                else
+                    Toast.makeText(getContext(), "Please fill all fields and add a photo", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -112,6 +115,8 @@ public class NewPostFrag extends Fragment {
         });
     }
 
+    //-----------------------------------------------------------------------------------------------------
+
     void chooseImageFromGallery(){
         try{
             Intent openGalleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -123,6 +128,8 @@ public class NewPostFrag extends Fragment {
             Toast.makeText(getActivity(), "New post Page: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
+
+    //-----------------------------------------------------------------------------------------------------
 
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -137,6 +144,8 @@ public class NewPostFrag extends Fragment {
         }
     }
 
+    //-----------------------------------------------------------------------------------------------------
+
     private Post generateNewPost(){
 
         Post newPost = new Post();
@@ -149,6 +158,8 @@ public class NewPostFrag extends Fragment {
         newPost.username = User.getInstance().userUsername;
         return newPost;
     }
+
+    //-----------------------------------------------------------------------------------------------------
 
     private Bitmap uriToBitmap(Uri selectedFileUri) {
 

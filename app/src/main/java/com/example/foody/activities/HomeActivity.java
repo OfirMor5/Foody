@@ -3,6 +3,7 @@ import com.example.foody.R;
 import com.example.foody.fragments.FeedListFrag;
 import com.example.foody.fragments.FeedListFragDirections;
 import com.example.foody.model.Post;
+import com.example.foody.fragments.CommentListFrag;
 
 import android.os.Bundle;
 import androidx.navigation.Navigation;

@@ -49,7 +49,6 @@ public class EditProfileFrag extends Fragment {
     Button saveProfileBtn;
     ProgressBar progressBar;
     ImageButton closeB;
-
     Uri profileImageUrl;
     Bitmap postImgBitmap;
     static int REQUEST_CODE = 1;
@@ -108,6 +107,8 @@ public class EditProfileFrag extends Fragment {
         usernameInput.setHint(User.getInstance().userUsername);
         infoInput.setHint(User.getInstance().userInfo);
     }
+
+    //-----------------------------------------------------------------------------------------------------
 
     void updateUserProfile() {
         final String username;
@@ -172,6 +173,8 @@ public class EditProfileFrag extends Fragment {
         }
     }
 
+    //-----------------------------------------------------------------------------------------------------
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -186,6 +189,8 @@ public class EditProfileFrag extends Fragment {
             Toast.makeText(getContext(), "No image was selected", Toast.LENGTH_SHORT).show();
         }
     }
+
+    //-----------------------------------------------------------------------------------------------------
 
     private Bitmap uriToBitmap(Uri selectedFileUri) {
         try {
