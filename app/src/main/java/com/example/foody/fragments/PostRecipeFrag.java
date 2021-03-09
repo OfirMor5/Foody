@@ -7,7 +7,6 @@ import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 import  com.example.foody.model.Model;
 import com.example.foody.model.User;
-import com.example.foody.model.ModelFirebase;
 import android.widget.Button;
 
 
@@ -21,7 +20,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -38,7 +36,6 @@ public class PostRecipeFrag extends Fragment {
     ImageButton closeB;
     ImageButton editPostB;
     ImageButton deletePostB;
-    Button contact;
     Button comments;
 
     //-----------------------------------------------------------------------------------------------------
@@ -71,14 +68,6 @@ public class PostRecipeFrag extends Fragment {
                 profilePic.setImageResource(R.drawable.profile_pic_placeholde);
             }
 
-//            contact.setText("Contact " + post.username);
-//            contact.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    DialogFrag dialog = DialogFrag.newInstance(post.username + "'s Contact Info", post.contact);
-//                    dialog.show(getParentFragmentManager(),"TAG");
-//                }
-//            });
 
             comments.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -42,7 +42,6 @@ public class NewPostFrag extends Fragment {
     ProgressBar progressBar;
     EditText postTitleInput;
     EditText postContentInput;
-    EditText contactInput;
     ImageView postImageView;
 
 

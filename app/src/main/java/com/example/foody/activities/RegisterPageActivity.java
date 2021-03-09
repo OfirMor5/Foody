@@ -3,14 +3,12 @@ package com.example.foody.activities;
 import com.example.foody.R;
 import com.example.foody.Utils;
 
-import androidx.appcompat.app.AppCompatActivity;
-import android.content.ContentResolver;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
-import android.webkit.MimeTypeMap;
+import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent;
+
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,7 +18,6 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import com.example.foody.model.ModelFirebase;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 
@@ -98,12 +95,7 @@ public class RegisterPageActivity extends AppCompatActivity {
     }
 
 
-
-
     //-----------------------------------------------------------------------------------------------------
-
-
-
 
 
     @Override

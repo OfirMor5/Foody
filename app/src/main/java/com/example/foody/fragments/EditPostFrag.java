@@ -49,7 +49,7 @@ public class EditPostFrag extends Fragment {
     //-----------------------------------------------------------------------------------------------------
 
     public EditPostFrag() {
-        // Required empty public constructor
+
     }
 
     @Override

@@ -2,10 +2,9 @@ package com.example.foody.fragments;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
-
 import com.example.foody.model.Comment;
 import com.example.foody.model.Model;
-import com.example.foody.model.Post;
+
 
 import java.util.List;
 

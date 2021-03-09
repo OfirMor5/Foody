@@ -2,12 +2,9 @@ package com.example.foody.fragments;
 
 import com.example.foody.R;
 import com.example.foody.model.Model;
-import com.example.foody.model.Post;
 import com.example.foody.model.User;
 import com.example.foody.model.StoreModel;
-import com.example.foody.model.ModelFirebase;
 
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,19 +19,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import android.widget.ImageButton;
 
 
@@ -56,15 +49,15 @@ public class EditProfileFrag extends Fragment {
     //-----------------------------------------------------------------------------------------------------
 
     public EditProfileFrag() {
-        // Required empty public constructor
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_editprofile, container, false);
-
         profilePicImageView = view.findViewById(R.id.edit_profile_fragment_profile_image_view);
         usernameInput = view.findViewById(R.id.edit_profile_fragment_username_edit_text);
         infoInput = view.findViewById(R.id.edit_profile_fragment_info_edit_text);

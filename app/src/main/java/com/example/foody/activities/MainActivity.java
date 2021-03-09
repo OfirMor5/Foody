@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import com.example.foody.R;
 import com.example.foody.Utils;
-import com.example.foody.activities.LoginPageActivity;
+
 
 public class MainActivity extends AppCompatActivity {
 

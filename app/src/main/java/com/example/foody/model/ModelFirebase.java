@@ -9,10 +9,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.Query;
+
 import com.google.firebase.firestore.DocumentSnapshot;
-import static com.google.firebase.firestore.Query.Direction.ASCENDING;
-import static com.google.firebase.firestore.Query.Direction.DESCENDING;
+
 import android.content.ContentResolver;
 import android.net.Uri;
 import android.webkit.MimeTypeMap;
@@ -26,7 +25,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.example.foody.FoodyApp;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -427,6 +425,8 @@ public class ModelFirebase {
         });
     }
 
+    //-----------------------------------------------------------------------------------------------------
+
     public static void setUserAppData(final String email){
         FirebaseFirestore db = FirebaseFirestore.getInstance();;
         final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -443,6 +443,8 @@ public class ModelFirebase {
             }
         });
     }
+
+    //-----------------------------------------------------------------------------------------------------
 
     public static void getDeletedPostsId(final Model.Listener<List<String>> listener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();

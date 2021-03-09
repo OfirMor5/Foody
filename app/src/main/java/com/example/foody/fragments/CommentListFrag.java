@@ -48,7 +48,7 @@ public class CommentListFrag extends Fragment {
     FloatingActionButton addCommentBtn;
 
     public CommentListFrag() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -56,6 +56,8 @@ public class CommentListFrag extends Fragment {
         super.onAttach(context);
         viewModel = new ViewModelProvider(this).get(CommentListModel.class);
     }
+
+    //-----------------------------------------------------------------------------------------------------
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -107,6 +109,8 @@ public class CommentListFrag extends Fragment {
 
         return view;
     }
+
+    //-----------------------------------------------------------------------------------------------------
 
     private void popUpCommentAlertDialog() {
         AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
@@ -162,6 +166,8 @@ public class CommentListFrag extends Fragment {
         return reversedData;
     }
 
+    //-----------------------------------------------------------------------------------------------------
+
     static class CommentRowViewHolder extends RecyclerView.ViewHolder {
 
         TextView username;
@@ -197,6 +203,8 @@ public class CommentListFrag extends Fragment {
 
         }
 
+        //-----------------------------------------------------------------------------------------------------
+
         public void bind(Comment commentToBind){
             comment = commentToBind;
             username.setText(commentToBind.username);
@@ -225,6 +233,8 @@ public class CommentListFrag extends Fragment {
             });
         }
 
+        //----------------------------------------
+
         private void popUpEditAlertDialog(){
             AlertDialog.Builder alert = new AlertDialog.Builder(itemView.getContext());
             final EditText editText = new EditText(itemView.getContext());
@@ -245,6 +255,8 @@ public class CommentListFrag extends Fragment {
 
             alert.show();
         }
+
+        //-----------------------------
 
         private void editComment(String newCommentContent){
             Comment EditedComment = comment;

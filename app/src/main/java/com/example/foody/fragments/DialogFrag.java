@@ -29,6 +29,8 @@ public class DialogFrag extends DialogFragment {
         return fragment;
     }
 
+    //-----------------------------------------------------------------------------------------------------
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,8 @@ public class DialogFrag extends DialogFragment {
             contactDialogMessage = getArguments().getString(ARG_MESSAGE);
         }
     }
+
+    //-----------------------------------------------------------------------------------------------------
 
     @NonNull
     @Override
